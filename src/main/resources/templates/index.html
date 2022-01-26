@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+    <style>
+        table {
+            width: 50%; /* Ширина таблицы */
+            background: white; /* Цвет фона таблицы */
+            color: black; /* Цвет текста */
+            border-spacing: 2px; /* Расстояние между ячейками */
+        }
+
+        td, th {
+            background: mediumaquamarine; /* Цвет фона ячеек */
+            padding: 5px; /* Поля вокруг текста */
+        }
+
+        .button {
+            background: mediumaquamarine;
+            text-decoration: none;
+            color: black;
+            padding: 0.5rem 0.5rem;
+        }
+
+        .center {
+            margin: 0 auto;
+            background: white;
+            color: black;
+            text-align: center;
+        }
+    </style>
+
+</head>
+<body>
+<div>
+    <a class="button" href="/new">Create new user</a>
+    <p>
+</div>
+<!--<div th:switch="${users}">-->
+<!--    <h2 th:case="null">No users found!</h2>-->
+<!--    <div th:case="*">-->
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Firstname</th>
+        <th>LastName</th>
+        <th>Options</th>
+    </tr>
+    <tbody>
+    <tr th:each="user : ${users}">
+        <td class="center" th:text="${user.id}"></td>
+        <td class="center" th:text="${user.firstName}"></td>
+        <td class="center" th:text="${user.lastName}"></td>
+        <td class="center">
+            <a class="button" th:href="@{users/{id}(id=${user.id})}">Edit</a>
+            <form th:method="DELETE" th:action="@{/users/{id}(id=${user.id})}">
+                <button class="button" type="submit" value="Delete">Delete</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<!--    </div>-->
+<!--</div>-->
+</body>
+</html>
